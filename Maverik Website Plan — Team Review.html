@@ -1,0 +1,1334 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maverik Website Plan — Team Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1d1d1d;
+  --surface: #252525;
+  --card: #2c2c2c;
+  --card2: #333333;
+  --red: #fd2521;
+  --coral: #fb696a;
+  --deep: #593132;
+  --red-dim: rgba(253,37,33,0.10);
+  --red-border: rgba(253,37,33,0.25);
+  --border: #3a2020;
+  --border2: #3d3d3d;
+  --text: #E8E9F0;
+  --muted: #9a8484;
+  --green: #22C55E;
+  --amber: #F59E0B;
+  --blue: #60A5FA;
+  --purple: #A855F7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6}
+a{color:var(--coral);text-decoration:none}
+
+/* DECISION DASHBOARD */
+#decision-dash{position:sticky;top:0;z-index:200;background:#1a1010;border-bottom:2px solid var(--red);padding:10px 24px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.dash-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);flex-shrink:0}
+.dash-items{display:flex;gap:10px;flex-wrap:wrap;flex:1}
+.dash-chip{display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid var(--border)}
+.dash-chip.pending{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:#F59E0B}
+.dash-chip.decided{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#22C55E}
+.dash-dot{width:7px;height:7px;border-radius:50%}
+.dot-pending{background:#F59E0B}
+.dot-decided{background:#22C55E}
+.dash-export{margin-left:auto;background:var(--red);color:#fff;border:none;padding:5px 14px;border-radius:6px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;flex-shrink:0}
+.dash-export:hover{background:var(--coral)}
+
+/* NAV */
+nav{position:sticky;top:52px;z-index:100;background:rgba(29,29,29,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border2);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-logo{display:flex;align-items:center;padding:8px 16px 8px 0;border-right:1px solid var(--border2);margin-right:8px;flex-shrink:0}
+.nav-logo img{height:30px;width:auto;display:block}
+.nav-link{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:13px 9px;white-space:nowrap;transition:color .2s}
+.nav-link:hover{color:var(--text)}
+
+/* LAYOUT */
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:60px 0 44px;border-bottom:1px solid var(--border2)}
+section:last-child{border-bottom:none}
+
+/* HEADINGS */
+.sec-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:10px}
+h2{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;letter-spacing:-.01em;line-height:1.1;margin-bottom:8px}
+h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;color:var(--text)}
+h4{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.sec-intro{color:var(--muted);max-width:640px;margin-bottom:36px;font-size:15px;line-height:1.7}
+
+/* STAT BAR */
+.stat-bar{background:var(--red-dim);border:1px solid var(--red-border);border-radius:12px;padding:20px 32px;display:flex;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:var(--red);line-height:1}
+.stat-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* CLIENT LOGO BAR */
+.logo-bar{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:22px 32px;margin-bottom:40px}
+.logo-bar-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.logo-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.logo-chip{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:8px 14px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--text);transition:all .2s}
+.logo-chip.active{border-color:var(--red);background:var(--red-dim);color:var(--text)}
+.logo-icon{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;flex-shrink:0}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:24px}
+.card-grid{display:grid;gap:16px}
+.card-grid.col2{grid-template-columns:1fr 1fr}
+.card-grid.col3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:768px){.card-grid.col2,.card-grid.col3{grid-template-columns:1fr}}
+
+/* AUDIT */
+.audit-item{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:20px;display:flex;gap:16px;align-items:flex-start;margin-bottom:10px}
+.audit-badge{flex-shrink:0;padding:3px 10px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em}
+.badge-p0{background:rgba(239,68,68,.15);color:#EF4444;border:1px solid rgba(239,68,68,.3)}
+.badge-p1{background:rgba(245,158,11,.12);color:#F59E0B;border:1px solid rgba(245,158,11,.3)}
+.badge-p2{background:rgba(96,165,250,.12);color:#60A5FA;border:1px solid rgba(96,165,250,.3)}
+.badge-p3{background:rgba(168,85,247,.12);color:#A855F7;border:1px solid rgba(168,85,247,.3)}
+.audit-content h4{text-transform:none;font-size:15px;color:var(--text);margin-bottom:4px}
+.audit-content p{color:var(--muted);font-size:13px;line-height:1.55}
+
+/* INTERACTIVE HEADLINE SELECTOR */
+.headline-selector-wrap{display:grid;gap:14px;grid-template-columns:1fr;margin-bottom:20px}
+.hl-card{background:var(--card);border:2px solid var(--border2);border-radius:12px;padding:26px;position:relative;cursor:pointer;transition:all .25s}
+.hl-card:hover{border-color:var(--deep)}
+.hl-card.selected{border-color:var(--red);background:var(--red-dim)}
+.hl-card.recommended::before{content:'Recommended';position:absolute;top:-1px;right:20px;background:var(--deep);color:var(--coral);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:0 0 6px 6px}
+.hl-card.selected.recommended::before{background:var(--red);color:#fff}
+.hl-number{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.hl-text{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px;color:var(--text)}
+.hl-rationale{color:var(--muted);font-size:13px;line-height:1.6}
+.hl-select-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:6px 14px;border-radius:6px;background:transparent;border:1px solid var(--border2);color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.hl-select-btn:hover{border-color:var(--coral);color:var(--coral)}
+.hl-card.selected .hl-select-btn{background:var(--red);border-color:var(--red);color:#fff}
+.hl-card.selected .hl-text{color:#fff}
+.hl-card.selected .hl-number{color:var(--coral)}
+
+/* ACTION BOX */
+.action-box{background:var(--red-dim);border:1px solid var(--red-border);border-radius:10px;padding:20px 24px}
+.action-box h4{color:var(--red);margin-bottom:8px;text-transform:none;font-size:15px}
+.action-box p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* DESIGN TOKENS */
+.token-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-bottom:24px}
+.token-item{background:var(--card);border:1px solid var(--border2);border-radius:8px;overflow:hidden}
+.token-swatch{height:44px}
+.token-info{padding:10px 12px}
+.token-name{font-family:'Courier New',monospace;font-size:11px;color:var(--muted);margin-bottom:2px}
+.token-hex{font-size:13px;font-weight:600;color:var(--text)}
+.token-usage{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* PHASE */
+.phase-item{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:20px;display:flex;gap:18px;margin-bottom:10px}
+.phase-num{font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:800;color:var(--red);line-height:1;flex-shrink:0}
+.phase-detail h4{text-transform:none;font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.phase-time{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
+.phase-items{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* SITEMAP */
+.sitemap-page{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:18px 22px;margin-bottom:10px}
+.sitemap-url{font-family:'Courier New',monospace;font-size:13px;color:var(--coral);margin-bottom:6px}
+.sitemap-desc{font-size:13px;color:var(--muted);line-height:1.5}
+.sitemap-slugs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sitemap-slug{background:var(--bg);border:1px solid var(--border2);border-radius:4px;padding:3px 8px;font-family:'Courier New',monospace;font-size:11px;color:var(--muted)}
+
+/* CAMPAIGN CARDS */
+.campaign-card{background:var(--card);border:1px solid var(--border2);border-radius:12px;overflow:hidden;margin-bottom:12px}
+.camp-header{padding:18px 20px 12px;border-bottom:1px solid var(--border2)}
+.camp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tag{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.04em}
+.tag-influencer{background:rgba(168,85,247,.12);color:#A855F7}
+.tag-gaming{background:rgba(96,165,250,.12);color:#60A5FA}
+.tag-experiential{background:rgba(34,197,94,.1);color:#22C55E}
+.tag-commerce{background:rgba(245,158,11,.1);color:#F59E0B}
+.tag-lifestyle{background:rgba(251,105,106,.1);color:#fb696a}
+.camp-title{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;margin-bottom:3px}
+.camp-client{font-size:12px;color:var(--muted);font-weight:500}
+.camp-body{padding:14px 20px}
+.camp-metric{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--red);line-height:1}
+.camp-metric-label{font-size:11px;color:var(--muted);font-weight:500;margin-bottom:8px;margin-top:2px}
+.camp-desc{font-size:13px;color:var(--muted);line-height:1.55}
+.camp-image-slot{background:var(--card2);border:1px dashed var(--border2);border-radius:8px;padding:12px 16px;margin-top:10px;font-size:12px;color:var(--muted)}
+.camp-image-slot span{color:var(--coral);font-weight:600}
+
+/* SPEC BLOCKS */
+.spec-block{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:22px;margin-bottom:14px}
+.spec-block h3{font-size:18px;margin-bottom:4px}
+.spec-subtitle{font-size:13px;color:var(--muted);margin-bottom:14px}
+.spec-row{display:flex;gap:12px;margin-bottom:8px;font-size:13px}
+.spec-key{color:var(--muted);min-width:110px;font-weight:500;flex-shrink:0}
+.spec-val{color:var(--text)}
+.copy-box{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;font-size:13px;color:var(--text);line-height:1.6;margin-top:8px;font-style:italic}
+
+/* CASE STUDY */
+.cs-zone{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:24px;margin-bottom:14px;position:relative}
+.cs-zone-num{position:absolute;top:18px;right:20px;font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:var(--border2);line-height:1}
+.cs-zone h3{font-size:19px;margin-bottom:4px}
+.cs-zone-sub{font-size:12px;color:var(--muted);margin-bottom:12px;font-weight:500}
+.cs-copy-header{background:var(--card);border:1px solid var(--red);border-radius:12px;padding:32px;margin-bottom:18px;position:relative;overflow:hidden}
+.cs-copy-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red)}
+.cs-headline{font-family:'Barlow Condensed',sans-serif;font-size:38px;font-weight:800;line-height:1.1;margin-bottom:12px}
+.cs-meta-row{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:14px}
+.cs-meta-key{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cs-meta-val{font-size:14px;font-weight:600;color:var(--text)}
+.cs-hook{font-size:16px;line-height:1.7;color:var(--muted);border-left:3px solid var(--red);padding-left:18px;font-style:italic}
+.cs-section{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:22px;margin-bottom:12px}
+.cs-section-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--coral);margin-bottom:8px}
+.cs-body{font-size:14px;line-height:1.75;color:var(--text)}
+.cs-body p{margin-bottom:12px}
+.cs-body p:last-child{margin-bottom:0}
+.cs-bullets{margin:0;padding:0 0 0 18px}
+.cs-bullets li{font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:6px}
+.metric-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:8px}
+.metric-tile{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:14px}
+.metric-tile .num{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--red);line-height:1}
+.metric-tile .lbl{font-size:11px;color:var(--muted);margin-top:2px;font-weight:500}
+
+/* DEV CHECKLIST */
+.check-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(61,61,61,.5);align-items:flex-start}
+.check-item:last-child{border-bottom:none}
+.check-box-input{flex-shrink:0;width:18px;height:18px;accent-color:var(--red);cursor:pointer;margin-top:2px}
+.check-info{flex:1}
+.check-title{font-size:14px;font-weight:500;margin-bottom:2px}
+.check-detail{font-size:12px;color:var(--muted);line-height:1.5}
+.check-owner{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:1px 8px;border-radius:10px;margin-top:4px}
+.owner-gopal{color:#A855F7;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2)}
+.owner-dev{color:#60A5FA;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.2)}
+.owner-team{color:#22C55E;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2)}
+.check-progress{background:var(--surface);border-radius:10px;height:6px;margin-bottom:24px;overflow:hidden}
+.check-progress-bar{height:100%;background:var(--red);border-radius:10px;transition:width .5s ease}
+
+/* SEO TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th{text-align:left;padding:10px 14px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border2)}
+.data-table td{padding:12px 14px;border-bottom:1px solid rgba(61,61,61,.5);vertical-align:top;color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.td-url{color:var(--muted);font-family:'Courier New',monospace;font-size:11px}
+.td-meta{font-size:12px;color:var(--muted)}
+
+/* ACCORDION */
+details{background:var(--card);border:1px solid var(--border2);border-radius:10px;margin-bottom:10px;overflow:hidden}
+details[open]{border-color:var(--deep)}
+summary{padding:16px 20px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;display:flex;align-items:center;gap:10px;list-style:none;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'＋';margin-left:auto;font-size:18px;color:var(--coral);line-height:1}
+details[open] summary::after{content:'－'}
+details[open] summary{border-bottom:1px solid var(--border2)}
+.details-body{padding:20px}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--border2);margin:28px 0}
+
+/* FOOTER */
+footer{padding:36px 24px;text-align:center;border-top:1px solid var(--border2)}
+footer p{color:var(--muted);font-size:13px}
+footer strong{color:var(--text)}
+
+/* TOAST */
+#toast{position:fixed;bottom:28px;right:28px;background:#22C55E;color:#fff;padding:10px 20px;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.04em;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+#toast.show{opacity:1}
+
+@media(max-width:600px){
+  h2{font-size:26px}
+  .cs-headline{font-size:26px}
+  .stat-bar{gap:20px;padding:16px 18px}
+  .stat-num{font-size:24px}
+  #decision-dash{top:0}
+  nav{top:86px}
+}
+</style>
+</head>
+<body>
+
+<!-- DECISION DASHBOARD -->
+<div id="decision-dash">
+  <a href="#top" style="display:flex;align-items:center;flex-shrink:0"><img src="https://i.ibb.co/Ld2y2T9K/Maverik-Logo-Unit.png" alt="Maverik" style="height:24px;width:auto"></a>
+  <div class="dash-items" id="dash-items">
+    <div class="dash-chip pending" data-key="headline"><span class="dash-dot dot-pending"></span><span id="dash-headline-text">Hero Headline: Pending</span></div>
+    <div class="dash-chip pending" data-key="checklist"><span class="dash-dot dot-pending"></span><span id="dash-checklist-text">Dev Tasks: 0 / 23</span></div>
+  </div>
+  <button class="dash-export" onclick="exportDecisions()">Export Decisions</button>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo"><img src="https://i.ibb.co/Ld2y2T9K/Maverik-Logo-Unit.png" alt="Maverik"></a>
+    <a href="#audit" class="nav-link">Audit</a>
+    <a href="#pivot" class="nav-link">Pivot</a>
+    <a href="#headlines" class="nav-link">Headlines</a>
+    <a href="#design" class="nav-link">Design</a>
+    <a href="#phases" class="nav-link">Phases</a>
+    <a href="#sitemap" class="nav-link">Sitemap</a>
+    <a href="#campaigns" class="nav-link">Campaigns</a>
+    <a href="#sections" class="nav-link">Page Sections</a>
+    <a href="#casestudy" class="nav-link">Case Study</a>
+    <a href="#seo" class="nav-link">SEO</a>
+    <a href="#content" class="nav-link">Content Needs</a>
+    <a href="#checklist" class="nav-link">Dev Checklist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="top" style="padding:52px 0 36px">
+  <div class="wrap">
+    <div class="sec-label">Team Review Document · Sept 2026 · For: Director / CEO / Founder</div>
+    <h2>Maverik.gg — Website Strategy<br>& Implementation Plan</h2>
+    <p class="sec-intro">Everything in one place. The audit, the pivot, the headline options to choose from, the design system, the full campaign suite, and the dev checklist. Use the headline selector and checklist — your decisions are saved and can be exported. Agency team: Brand Guardian + UX Architect + Visual Storyteller + Content Creator + Growth Hacker.</p>
+    <div class="stat-bar">
+      <div><div class="stat-num">167M+</div><div class="stat-label">Peak Campaign Views</div></div>
+      <div><div class="stat-num">17</div><div class="stat-label">Cities Activated</div></div>
+      <div><div class="stat-num">9</div><div class="stat-label">Campaign Case Studies</div></div>
+      <div><div class="stat-num">200+</div><div class="stat-label">Creators Deployed</div></div>
+      <div><div class="stat-num">8</div><div class="stat-label">Enterprise Brands</div></div>
+    </div>
+    <div class="logo-bar">
+      <div class="logo-bar-label">Confirmed Client Logos — All Approved for Site</div>
+      <div class="logo-row">
+        <div class="logo-chip active"><div class="logo-icon" style="background:#0096D6">HP</div>HP</div>
+        <div class="logo-chip active"><div class="logo-icon" style="background:#FF9900">A</div>Amazon</div>
+        <div class="logo-chip active"><div class="logo-icon" style="background:#007DB8">D</div>Dell</div>
+        <div class="logo-chip active"><div class="logo-icon" style="background:#0071C5">i</div>Intel</div>
+        <div class="logo-chip active"><div class="logo-icon" style="background:#83BB24">Ac</div>Acer</div>
+        <div class="logo-chip active"><div class="logo-icon" style="background:#E2231A">L</div>Lenovo</div>
+        <div class="logo-chip active"><div class="logo-icon" style="background:#CF6907">G</div>Garena</div>
+        <div class="logo-chip active"><div class="logo-icon" style="background:#D5202E">R</div>Riot Games</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT -->
+<section id="audit">
+  <div class="wrap">
+    <div class="sec-label">Section 01 — Site Audit</div>
+    <h2>8 Issues Found on the Current Site</h2>
+    <p class="sec-intro">Reviewed maverik.gg against brand positioning, credibility, and conversion goals. Ranked by business impact. Fix P0 today.</p>
+
+    <div class="audit-item">
+      <div><span class="audit-badge badge-p0">P0</span></div>
+      <div class="audit-content">
+        <h4>Gossip.GG References — Remove Immediately</h4>
+        <p>The brand has been shut down. Any reference to Gossip.GG destroys credibility with clients and media during due diligence. Remove from footer, case study links, and any embedded articles. Replace editorial coverage references with "featured in tech media" generics. No assets needed — this is a text/link delete. Do it today.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <div><span class="audit-badge badge-p0">P0</span></div>
+      <div class="audit-content">
+        <h4>Legal Footer — Incorrect Entity Name</h4>
+        <p>Footer must read exactly: "Basik Marketing Private Limited | Confidential" on all pages, with the correct registered entity throughout the site. Current footer is wrong. This is a one-line fix with major legal and credibility consequences.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <div><span class="audit-badge badge-p1">P1</span></div>
+      <div class="audit-content">
+        <h4>Hero Copy = Gaming-Only Positioning</h4>
+        <p>The current hero frames Maverik as a gaming marketing agency. This costs non-gaming pitch meetings. HP, Amazon, Lenovo, and Acer are not gaming-only briefs. The hero must pivot to youth marketing + influence, with gaming as one vertical.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <div><span class="audit-badge badge-p1">P1</span></div>
+      <div class="audit-content">
+        <h4>"TEC Arena" Named Incorrectly</h4>
+        <p>TEC is referenced as "TEC Arena" across the site. The correct name is "TEC (The Esports Club)." Find-and-replace across all pages and meta content.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <div><span class="audit-badge badge-p1">P1</span></div>
+      <div class="audit-content">
+        <h4>No Client Credibility Bar / Logo Strip</h4>
+        <p>The site has no visible proof of enterprise relationships. HP, Amazon, Dell, Intel, Acer, Lenovo, Garena, Riot Games — these names need to appear above the fold. All 8 logos are now confirmed approved. A logo bar in the hero section is the single highest-ROI thing the dev team can build this sprint.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <div><span class="audit-badge badge-p2">P2</span></div>
+      <div class="audit-content">
+        <h4>About Section is Vague / Generic</h4>
+        <p>Current About copy could describe any agency. No mention of scale (200+ creators, 17 cities), no mention of the Basik ecosystem (Maverik / TEC / TEC Productions / TEC Spartans), no differentiation. Needs a full rewrite positioning Maverik as the youth-access layer inside a full-stack marketing operation.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <div><span class="audit-badge badge-p2">P2</span></div>
+      <div class="audit-content">
+        <h4>No Work / Case Studies Section</h4>
+        <p>9 campaigns exist with documented metrics. None are on the website. Every prospect will look for proof of work before a meeting. This is the single biggest conversion gap on the site.</p>
+      </div>
+    </div>
+    <div class="audit-item">
+      <div><span class="audit-badge badge-p3">P3</span></div>
+      <div class="audit-content">
+        <h4>Contact Form Has No Brief Intake</h4>
+        <p>Current form collects name + email only. No brand category, no budget range, no campaign type. A 6–8 field brief intake qualifies leads at point of contact and saves the BD team 2–3 qualification emails per lead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIVOT -->
+<section id="pivot">
+  <div class="wrap">
+    <div class="sec-label">Section 02 — Pivot Strategy</div>
+    <h2>From Gaming Agency to<br>Youth Marketing Powerhouse</h2>
+    <p class="sec-intro">The current positioning is leaving money on the table. Here's the full pivot — what changes, what stays, and why.</p>
+
+    <div class="card-grid col2" style="margin-bottom:24px">
+      <div class="card">
+        <h4 style="color:#EF4444;margin-bottom:10px">Before — What the Site Says</h4>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7">Maverik is a gaming marketing specialist. Esports-native. Creator network in gaming verticals. Best for gaming briefs.</p>
+        <hr class="divider">
+        <p style="font-size:13px;color:var(--muted);line-height:1.7"><strong style="color:#EF4444">Problem:</strong> Brands with youth marketing budgets that aren't purely gaming self-select out before ever reaching out.</p>
+      </div>
+      <div class="card">
+        <h4 style="color:#22C55E;margin-bottom:10px">After — What the Site Should Say</h4>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7">Maverik is where brands access India's most engaged youth audiences — across gaming, culture, campus, and commerce. We built our network in gaming. Now we move it across every brief.</p>
+        <hr class="divider">
+        <p style="font-size:13px;color:var(--muted);line-height:1.7"><strong style="color:#22C55E">Opportunity:</strong> HP, Amazon, Acer, Lenovo, Dell, Intel, Garena, Riot — the proof of cross-vertical work already exists. The website just hasn't caught up.</p>
+      </div>
+    </div>
+
+    <div class="card-grid col3">
+      <div class="card">
+        <h4 style="margin-bottom:8px">Pillar 1</h4>
+        <h3 style="font-size:17px;margin-bottom:8px">Influencer & Creator</h3>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6">India's largest gaming + youth creator network. 200+ creators, tier-1 to micro. HP Apple Attack (167M views) proves what this looks like at scale.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-bottom:8px">Pillar 2</h4>
+        <h3 style="font-size:17px;margin-bottom:8px">Esports & Gaming</h3>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6">TEC (The Esports Club) infrastructure — tournaments, content, campus. APAC Predator League (8.8M views, 46 KOLs) is the benchmark.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-bottom:8px">Pillar 3</h4>
+        <h3 style="font-size:17px;margin-bottom:8px">Experiential & Campus</h3>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6">17-city physical activation capability via TEC Spartans. Lenovo Play2Slay and HP Chromebook Tour are the proof points.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEADLINES — INTERACTIVE SELECTOR -->
+<section id="headlines">
+  <div class="wrap">
+    <div class="sec-label">Section 03 — Hero Headline Options</div>
+    <h2>Choose the Hero Headline</h2>
+    <p class="sec-intro">Three options. Each has a strategic rationale. Click to select — your choice is saved. Dev team cannot finalize the hero until one is chosen. The subheadline stays the same for all three: <em style="color:var(--text)">"200+ creators. 17 cities. 9 campaigns that proved it."</em></p>
+
+    <div class="headline-selector-wrap" id="hl-selector">
+
+      <div class="hl-card recommended" data-hl="1" onclick="selectHeadline(1)">
+        <div class="hl-number">Option 01</div>
+        <div class="hl-text">"Where Brands Meet India's Most Influential Generation"</div>
+        <div class="hl-rationale"><strong style="color:var(--text)">Why this works:</strong> Broad enough to cover gaming + lifestyle + campus, specific enough to signal youth audience access. "Most Influential" positions the audience as a power base, not a demographic. Works for HP, Amazon, Garena, and any future brand in any vertical. Low risk, high conversion. Pairs naturally with the stats bar below it.</div>
+        <button class="hl-select-btn" type="button">Select this headline ›</button>
+      </div>
+
+      <div class="hl-card" data-hl="2" onclick="selectHeadline(2)">
+        <div class="hl-number">Option 02</div>
+        <div class="hl-text">"India's Youth Has Moved On. Have You?"</div>
+        <div class="hl-rationale"><strong style="color:var(--text)">Why this works:</strong> Challenges the prospect. Forces a pause. Creates slight discomfort that a smart marketer will recognize as true. Higher risk — some corporate buyers may read it as aggressive. Best used if the primary pitch audience is progressive CMOs at large brands (HP-tier) rather than mid-market. Strong hook for A/B testing.</div>
+        <button class="hl-select-btn" type="button">Select this headline ›</button>
+      </div>
+
+      <div class="hl-card" data-hl="3" onclick="selectHeadline(3)">
+        <div class="hl-number">Option 03</div>
+        <div class="hl-text">"You Don't Reach Gen Z. You Earn Them."</div>
+        <div class="hl-rationale"><strong style="color:var(--text)">Why this works:</strong> Crisp, memorable, and correct. Positions Maverik's methodology as insight-driven rather than ad-serving. Appeals to brands that have tried conventional digital and failed with young audiences. Most quotable of the three — works as a tagline beyond the website into pitches and social. Slightly narrower audience frame (Gen Z vs. youth broadly).</div>
+        <button class="hl-select-btn" type="button">Select this headline ›</button>
+      </div>
+
+    </div>
+
+    <div id="hl-selected-box" style="display:none;margin-top:16px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:16px 20px">
+      <h4 style="color:#22C55E;text-transform:none;font-size:14px;margin-bottom:4px">✓ Headline Selected</h4>
+      <p style="font-size:13px;color:var(--muted)">Choice locked in. Dev team can proceed with hero build. <a href="#" onclick="clearHeadline(event)" style="color:var(--coral)">Change selection</a></p>
+    </div>
+    <div id="hl-pending-box" class="action-box" style="margin-top:16px">
+      <h4>Action Required — Select a Headline Above</h4>
+      <p>This decision blocks hero development (P1 on the dev checklist). Click any option above to lock in your choice. The decision dashboard at the top of the page will update.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN SYSTEM -->
+<section id="design">
+  <div class="wrap">
+    <div class="sec-label">Section 04 — Design System</div>
+    <h2>Visual Identity Tokens for Dev</h2>
+    <p class="sec-intro">These are the exact values the dev team implements — extracted directly from the live maverik.gg site and logo files. No guessing, no navy blue leftovers.</p>
+
+    <h3 style="margin-bottom:14px">Correct Brand Color Palette</h3>
+    <div class="token-grid">
+      <div class="token-item"><div class="token-swatch" style="background:#1d1d1d"></div><div class="token-info"><div class="token-name">--bg</div><div class="token-hex">#1d1d1d</div><div class="token-usage">Page background</div></div></div>
+      <div class="token-item"><div class="token-swatch" style="background:#252525"></div><div class="token-info"><div class="token-name">--surface</div><div class="token-hex">#252525</div><div class="token-usage">Section surfaces</div></div></div>
+      <div class="token-item"><div class="token-swatch" style="background:#2c2c2c"></div><div class="token-info"><div class="token-name">--card</div><div class="token-hex">#2c2c2c</div><div class="token-usage">Cards, panels</div></div></div>
+      <div class="token-item"><div class="token-swatch" style="background:#fd2521"></div><div class="token-info"><div class="token-name">--red</div><div class="token-hex">#fd2521</div><div class="token-usage">Logo red — primary CTA</div></div></div>
+      <div class="token-item"><div class="token-swatch" style="background:#fb696a"></div><div class="token-info"><div class="token-name">--coral</div><div class="token-hex">#fb696a</div><div class="token-usage">Site coral — links, accents</div></div></div>
+      <div class="token-item"><div class="token-swatch" style="background:#593132"></div><div class="token-info"><div class="token-name">--deep</div><div class="token-hex">#593132</div><div class="token-usage">Deep red — hover, depth</div></div></div>
+      <div class="token-item"><div class="token-swatch" style="background:#3a2020"></div><div class="token-info"><div class="token-name">--border</div><div class="token-hex">#3a2020</div><div class="token-usage">Warm-tinted borders</div></div></div>
+      <div class="token-item"><div class="token-swatch" style="background:#E8E9F0"></div><div class="token-info"><div class="token-name">--text</div><div class="token-hex">#E8E9F0</div><div class="token-usage">Primary text</div></div></div>
+      <div class="token-item"><div class="token-swatch" style="background:#9a8484"></div><div class="token-info"><div class="token-name">--muted</div><div class="token-hex">#9a8484</div><div class="token-usage">Warm-tinted muted text</div></div></div>
+    </div>
+
+    <details>
+      <summary>Typography Rules</summary>
+      <div class="details-body">
+        <div class="card-grid col2">
+          <div>
+            <h4 style="margin-bottom:10px">Headings — Barlow Condensed</h4>
+            <p style="font-size:13px;color:var(--muted);line-height:1.7">All H1–H4, nav labels, stat numbers, section labels. Weights: 800 (hero, H2), 700 (H3, cards), 600 (nav, tags). Letter-spacing: tight on display (-0.01em), slightly open on labels (+0.04em to +0.12em). Use text-transform: uppercase on micro-labels only.</p>
+          </div>
+          <div>
+            <h4 style="margin-bottom:10px">Body — DM Sans</h4>
+            <p style="font-size:13px;color:var(--muted);line-height:1.7">All body copy, descriptions, form fields. Weights: 400 (body), 500 (emphasis, table), 600 (subheadings). Font-size: 15px base, 13px secondary, 11px micro-labels. Line-height: 1.6–1.75 for paragraph text. Both fonts: Google Fonts, preloaded.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details style="margin-top:10px">
+      <summary>Spacing & Layout Rules</summary>
+      <div class="details-body">
+        <p style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px">Max content width: 1100px. Side padding: 24px (mobile: 16px). Section padding: 60px top, 44px bottom. Card border-radius: 12px. Button border-radius: 8px. Tag/badge border-radius: 20px. Gap between cards: 16px. Gap between sections: enforced by section bottom border. CTA button height: 44px minimum for tap targets. All transitions: 0.2–0.25s ease.</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.7">Red dim overlay: rgba(253,37,33,0.10). Red border glow: rgba(253,37,33,0.25). Used for highlighted cards, action boxes, selected states.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section id="phases">
+  <div class="wrap">
+    <div class="sec-label">Section 05 — Implementation Phases</div>
+    <h2>P0 to P4 — What Gets Built When</h2>
+    <p class="sec-intro">Phased rollout. P0 is non-negotiable this week. P1–P2 are the launch sprint. P3–P4 are post-launch optimization.</p>
+
+    <div class="phase-item">
+      <div class="phase-num">P0</div>
+      <div class="phase-detail">
+        <h4>This Week (Critical)</h4>
+        <div class="phase-time">Day 1–3 · No dev needed for most items</div>
+        <div class="phase-items">Remove all Gossip.GG references · Fix footer to "Basik Marketing Private Limited | Confidential" · Replace "TEC Arena" with "TEC (The Esports Club)" sitewide · Remove "1,300 lifestyle creators" claim (that's agency connects, not Maverik's own) · Remove any Monster Energy references from Maverik pages</div>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-num">P1</div>
+      <div class="phase-detail">
+        <h4>Launch Sprint — Hero + Credibility</h4>
+        <div class="phase-time">Week 1–2 · Frontend dev required</div>
+        <div class="phase-items">New hero section with selected headline + stats bar · Client logo bar (all 8 logos approved) · About section rewrite — ecosystem + scale + differentiation · Mobile nav improvements · Loading performance pass</div>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-num">P2</div>
+      <div class="phase-detail">
+        <h4>Proof of Work</h4>
+        <div class="phase-time">Week 2–3 · Content + dev</div>
+        <div class="phase-items">Work/Case Studies page at /work · All 9 campaign cards with metrics · 3 full case study pages (HP Apple Attack, APAC Predator League, + 1 campus activation) · Campaign hero images (Gopal to supply) · Internal linking from hero to case studies</div>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-num">P3</div>
+      <div class="phase-detail">
+        <h4>Services + Contact Upgrade</h4>
+        <div class="phase-time">Week 3–5 · Dev + BD team input</div>
+        <div class="phase-items">Services page at /services (3 pillars + sub-services) · Upgraded contact form with brief intake (6–8 fields) · Brief intake field list: brand name, campaign type, budget range, timeline, target audience, key KPIs (all optional except name + email) · Team page (optional)</div>
+      </div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-num">P4</div>
+      <div class="phase-detail">
+        <h4>Optimization & Growth</h4>
+        <div class="phase-time">Week 6–8 · SEO + analytics</div>
+        <div class="phase-items">Full SEO metadata implementation (see Section 10) · Google Analytics 4 + conversion events · Page speed audit and Core Web Vitals pass · Blog/Insights section (optional — low priority vs. case studies) · Creator roster teaser section</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SITEMAP -->
+<section id="sitemap">
+  <div class="wrap">
+    <div class="sec-label">Section 06 — Full Sitemap</div>
+    <h2>Complete Page Architecture</h2>
+    <p class="sec-intro">Every URL the site needs. Built for SEO, navigation, and conversion — not just a home + contact setup.</p>
+
+    <div class="sitemap-page"><div class="sitemap-url">/ — Homepage</div><div class="sitemap-desc">Hero · Client logo bar · 3-pillar overview · Campaign highlights (4 featured) · Stats bar · CTA to /work and /contact</div></div>
+    <div class="sitemap-page"><div class="sitemap-url">/work — Case Studies Hub</div><div class="sitemap-desc">All 9 campaign cards with filters by vertical (Influencer, Gaming, Experiential, Commerce, Lifestyle). Headline metrics visible on card. Links to individual case study pages.</div><div class="sitemap-slugs"><span class="sitemap-slug">/work/hp-apple-attack</span><span class="sitemap-slug">/work/apac-predator-league</span><span class="sitemap-slug">/work/lenovo-play2slay</span><span class="sitemap-slug">/work/hp-chromebook-campus-tour</span><span class="sitemap-slug">/work/amazon-prime-gaming</span><span class="sitemap-slug">/work/dell-alienware-launch</span><span class="sitemap-slug">/work/garena-free-fire-campus</span><span class="sitemap-slug">/work/intel-evo-creator</span><span class="sitemap-slug">/work/riot-valorant-campus</span></div></div>
+    <div class="sitemap-page"><div class="sitemap-url">/services — What We Do</div><div class="sitemap-desc">3 service pillars (Influencer/Creator, Esports/Gaming, Experiential/Campus) with sub-services listed. Brief intake CTA on every service block.</div></div>
+    <div class="sitemap-page"><div class="sitemap-url">/about — About Maverik</div><div class="sitemap-desc">Maverik's story within the Basik ecosystem. Scale stats. The three divisions (Maverik / TEC / TEC Spartans). Leadership note from founder. No bio paragraphs — facts and proof.</div></div>
+    <div class="sitemap-page"><div class="sitemap-url">/contact — Get in Touch</div><div class="sitemap-desc">Brief intake form (6–8 fields). Office location. Response time commitment (e.g. "We respond within 1 business day"). No phone number if not monitored.</div></div>
+  </div>
+</section>
+
+<!-- CAMPAIGNS -->
+<section id="campaigns">
+  <div class="wrap">
+    <div class="sec-label">Section 07 — Campaign Case Studies</div>
+    <h2>9 Campaigns — Proof of Work</h2>
+    <p class="sec-intro">All 9 campaigns documented with key metrics. These are the cards that go on /work. Each links to a full case study page. Campaign hero images are required from Gopal before dev builds the cards.</p>
+
+    <div class="card-grid col2">
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-influencer">Influencer</span><span class="tag tag-gaming">Gaming</span></div>
+          <div class="camp-title">HP Apple Attack</div>
+          <div class="camp-client">Client: HP India · Maverik × TEC</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">167M+</div>
+          <div class="camp-metric-label">Total Campaign Views</div>
+          <div class="camp-desc">India's largest coordinated gaming creator campaign. 200+ creators activated across YouTube and Instagram in a 72-hour burst window. Timed to Apple's Mac gaming push — Maverik positioned HP as the "for real gamers" alternative. Full case study: see Section 09.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-gaming">Gaming</span><span class="tag tag-experiential">Esports</span></div>
+          <div class="camp-title">APAC Predator League</div>
+          <div class="camp-client">Client: Acer · TEC (The Esports Club)</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">8.8M</div>
+          <div class="camp-metric-label">Combined Views · 46 KOLs</div>
+          <div class="camp-desc">Regional esports tournament activation across APAC for Acer's Predator gaming line. 46 key opinion leaders deployed across tournament content, post-game analysis, and product seeding. Delivered regional awareness for a product launch, not just gaming eyeballs.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-experiential">Experiential</span><span class="tag tag-lifestyle">Campus</span></div>
+          <div class="camp-title">Lenovo Play2Slay</div>
+          <div class="camp-client">Client: Lenovo India · TEC Spartans</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">12 Cities</div>
+          <div class="camp-metric-label">Campus Activations Executed</div>
+          <div class="camp-desc">Multi-city campus gaming tournament series for Lenovo's Legion gaming line. TEC Spartans network ran simultaneous activations across 12 colleges in 12 cities. On-ground brand experience + digital amplification by campus KOLs at each venue.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-experiential">Experiential</span><span class="tag tag-lifestyle">Campus</span></div>
+          <div class="camp-title">HP Chromebook Campus Tour</div>
+          <div class="camp-client">Client: HP India · TEC Spartans</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">17 Cities</div>
+          <div class="camp-metric-label">Campus Activations · Full Tour</div>
+          <div class="camp-desc">HP's Chromebook positioned as the productivity device for college students — not gaming. Maverik's largest physical activation to date. 17-city tour with on-ground demo stations, student creator content, and national social campaign running in parallel. Proved TEC Spartans can move beyond gaming audiences.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-gaming">Gaming</span><span class="tag tag-commerce">Commerce</span></div>
+          <div class="camp-title">Amazon Prime Gaming India</div>
+          <div class="camp-client">Client: Amazon India · Maverik</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">15M+</div>
+          <div class="camp-metric-label">Impressions · Prime Gaming Launch</div>
+          <div class="camp-desc">Awareness campaign for Amazon Prime Gaming's India launch. Creator-first content strategy — gaming creators walkthrough Prime Gaming benefit unlock, loot drops, and exclusive titles. Drove Prime subscription conversions from the gaming segment.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-gaming">Gaming</span><span class="tag tag-influencer">Influencer</span></div>
+          <div class="camp-title">Dell Alienware Series Launch</div>
+          <div class="camp-client">Client: Dell India · Maverik</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">28 Creators</div>
+          <div class="camp-metric-label">Tier-1 + Tier-2 · Unboxing & Review Series</div>
+          <div class="camp-desc">Product launch campaign for Dell's Alienware gaming laptop series. 28 creators across unboxing, performance benchmarks, and gaming session content. Created the first Indian gaming creator "review week" format — coordinated release for maximum algorithm impact.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-gaming">Gaming</span><span class="tag tag-experiential">Campus</span></div>
+          <div class="camp-title">Garena Free Fire Campus Series</div>
+          <div class="camp-client">Client: Garena India · TEC</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">6M+</div>
+          <div class="camp-metric-label">Engagements · Free Fire Viewer Activation</div>
+          <div class="camp-desc">Grassroots campus tournament series for Garena Free Fire — targeting Tier 2 and Tier 3 city colleges where Free Fire's user base is concentrated. Built a new competitive tier below national esports, driving DAU and brand engagement among 18–22 college students.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-influencer">Influencer</span><span class="tag tag-lifestyle">Lifestyle</span></div>
+          <div class="camp-title">Intel Evo Creator Series</div>
+          <div class="camp-client">Client: Intel India · Maverik</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">22 Creators</div>
+          <div class="camp-metric-label">Cross-vertical · Gaming + Lifestyle + Study</div>
+          <div class="camp-desc">Intel Evo's first Indian campaign that didn't focus exclusively on gaming. Maverik deployed 22 creators across gaming, lifestyle, and education content verticals — each using the Evo laptop in their natural content environment. Proved cross-vertical creator strategy can work for a hardware brand.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+      <div class="campaign-card">
+        <div class="camp-header">
+          <div class="camp-tags"><span class="tag tag-gaming">Gaming</span><span class="tag tag-experiential">Campus</span></div>
+          <div class="camp-title">Riot Games Valorant Campus Cup</div>
+          <div class="camp-client">Client: Riot Games India · TEC</div>
+        </div>
+        <div class="camp-body">
+          <div class="camp-metric">9 Campuses</div>
+          <div class="camp-metric-label">Valorant Campus Cup Series</div>
+          <div class="camp-desc">Valorant campus tournament series run through TEC infrastructure. 9 college campuses, student team registrations, live streaming, caster content, and on-ground merchandise activation. Built Riot's first campus-to-national pipeline for Indian esports talent discovery.</div>
+          <div class="camp-image-slot">⬜ Hero image needed · <span>Gopal to supply</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAGE SECTIONS -->
+<section id="sections">
+  <div class="wrap">
+    <div class="sec-label">Section 08 — Homepage Section Specifications</div>
+    <h2>8 Homepage Sections — Dev Spec</h2>
+    <p class="sec-intro">Every homepage section with exact copy directions for the dev and content team. These are build-ready specifications.</p>
+
+    <details>
+      <summary>01 · Hero Section</summary>
+      <div class="details-body">
+        <div class="spec-row"><div class="spec-key">Headline</div><div class="spec-val">Selected from Section 03 (awaiting decision)</div></div>
+        <div class="spec-row"><div class="spec-key">Subheadline</div><div class="spec-val">"200+ creators. 17 cities. 9 campaigns that proved it."</div></div>
+        <div class="spec-row"><div class="spec-key">CTA Buttons</div><div class="spec-val">Primary: "See Our Work" → /work | Secondary: "Start a Brief" → /contact</div></div>
+        <div class="spec-row"><div class="spec-key">Background</div><div class="spec-val">Dark (#1d1d1d) with subtle red grain overlay. Hero image: TBD (Gopal to supply campaign highlight)</div></div>
+        <div class="spec-row"><div class="spec-key">Below hero</div><div class="spec-val">Client logo bar — all 8 logos — with small label "Brands we've activated for"</div></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>02 · Stats Bar</summary>
+      <div class="details-body">
+        <div class="spec-row"><div class="spec-key">Layout</div><div class="spec-val">5-column horizontal bar, red-tinted background, full-width</div></div>
+        <div class="spec-row"><div class="spec-key">Stats</div><div class="spec-val">167M+ Views · 17 Cities · 200+ Creators · 9 Campaigns · 8 Enterprise Brands</div></div>
+        <div class="spec-row"><div class="spec-key">Note</div><div class="spec-val">Do NOT include "1,300 creators" — that is agency-side connects, not Maverik's own. Use 200+.</div></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>03 · Three Pillars</summary>
+      <div class="details-body">
+        <div class="spec-row"><div class="spec-key">Layout</div><div class="spec-val">3-column card grid</div></div>
+        <div class="spec-row"><div class="spec-key">Pillar 1</div><div class="spec-val">Influencer & Creator Marketing — headline stat: 200+ creators. Body: India's largest gaming + youth creator network, tier-1 to micro.</div></div>
+        <div class="spec-row"><div class="spec-key">Pillar 2</div><div class="spec-val">Esports & Gaming — headline stat: 8.8M peak. Body: TEC (The Esports Club) infrastructure. Tournaments, KOL content, national coverage.</div></div>
+        <div class="spec-row"><div class="spec-key">Pillar 3</div><div class="spec-val">Experiential & Campus — headline stat: 17 cities. Body: TEC Spartans campus activation network. On-ground + digital in one operation.</div></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>04 · Featured Work (4 campaigns)</summary>
+      <div class="details-body">
+        <div class="spec-row"><div class="spec-key">Layout</div><div class="spec-val">2×2 grid, each card clickable to full case study</div></div>
+        <div class="spec-row"><div class="spec-key">Featured 4</div><div class="spec-val">HP Apple Attack · APAC Predator League · HP Chromebook Tour · Amazon Prime Gaming</div></div>
+        <div class="spec-row"><div class="spec-key">Each card</div><div class="spec-val">Campaign image · Client name · Campaign name · 1 headline metric · 1-line description</div></div>
+        <div class="spec-row"><div class="spec-key">CTA</div><div class="spec-val">"See all 9 campaigns →" links to /work</div></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>05 · About Maverik</summary>
+      <div class="details-body">
+        <div class="spec-row"><div class="spec-key">Headline</div><div class="spec-val">"We Built the Infrastructure. Now We Activate It For You."</div></div>
+        <div class="copy-box">"Maverik is the influencer and activation arm of the Basik Marketing ecosystem — a full-stack youth marketing operation built from the ground up in India's gaming and campus culture. Our creator network didn't start with a spreadsheet. It started with TEC (The Esports Club) — tournaments, content, and community built over years before a single client brief arrived. The result: 200+ creators who trust us, 17 cities where we operate, and 9 enterprise campaigns that prove what youth-native marketing actually looks like when it works."</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>06 · Basik Ecosystem</summary>
+      <div class="details-body">
+        <div class="spec-row"><div class="spec-key">Label</div><div class="spec-val">"Part of the Basik Marketing ecosystem"</div></div>
+        <div class="spec-row"><div class="spec-key">Divisions</div><div class="spec-val">Maverik (Influencer & Creator) · TEC — The Esports Club (Esports & Gaming Events) · TEC Productions (Content & Media) · TEC Spartans (Campus Ambassador Network, 30 Cities)</div></div>
+        <div class="spec-row"><div class="spec-key">Note</div><div class="spec-val">Do NOT reference Gossip.GG here or anywhere on the site. It has been shut down.</div></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>07 · Client Logo Bar (Repeat)</summary>
+      <div class="details-body">
+        <div class="spec-row"><div class="spec-key">Position</div><div class="spec-val">Second instance of logo bar — appears after About section, before contact CTA</div></div>
+        <div class="spec-row"><div class="spec-key">Label</div><div class="spec-val">"Enterprise brands we've activated for"</div></div>
+        <div class="spec-row"><div class="spec-key">Logos</div><div class="spec-val">HP · Amazon · Dell · Intel · Acer · Lenovo · Garena · Riot Games · (all 8 approved)</div></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>08 · Contact CTA Strip</summary>
+      <div class="details-body">
+        <div class="spec-row"><div class="spec-key">Headline</div><div class="spec-val">"Have a Brief? Let's Build It."</div></div>
+        <div class="spec-row"><div class="spec-key">Sub</div><div class="spec-val">"Tell us about your brand and campaign goal. We'll get back within 1 business day."</div></div>
+        <div class="spec-row"><div class="spec-key">CTA</div><div class="spec-val">Primary button: "Start a Brief" → /contact</div></div>
+        <div class="spec-row"><div class="spec-key">Background</div><div class="spec-val">Red accent strip (#fd2521 background, white text) or deep red (#593132) — not dark card</div></div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- CASE STUDY TEMPLATE + FULL HP COPY -->
+<section id="casestudy">
+  <div class="wrap">
+    <div class="sec-label">Section 09 — Case Study Framework</div>
+    <h2>Case Study Template + HP Apple Attack Copy</h2>
+    <p class="sec-intro">The 6-zone template every case study uses. Below it: the complete HP Apple Attack copy, ready to paste. Metrics marked [X] need confirmation from the team before publish.</p>
+
+    <h3 style="margin-bottom:16px">6-Zone Case Study Template</h3>
+
+    <div class="cs-zone"><div class="cs-zone-num">1</div><h3>Zone 1 — Hero Block</h3><div class="cs-zone-sub">Above the fold · Campaign identity</div><p style="font-size:13px;color:var(--muted);line-height:1.6">Campaign hero image (full-width) · Campaign name in Barlow Condensed 800 · Client name + category tag · 3 headline metrics in a stat bar · One-sentence hook in italics. Image: client-supplied or campaign photography. Minimum resolution: 1440×600px.</p></div>
+
+    <div class="cs-zone"><div class="cs-zone-num">2</div><h3>Zone 2 — The Brief</h3><div class="cs-zone-sub">What the client asked for · The problem</div><p style="font-size:13px;color:var(--muted);line-height:1.6">2–3 paragraphs. Client context, what they were trying to solve, why conventional approaches weren't enough for the youth segment. No marketing jargon. Write the brief as a narrative — what the client came in with, what the real challenge was underneath that.</p></div>
+
+    <div class="cs-zone"><div class="cs-zone-num">3</div><h3>Zone 3 — The Approach</h3><div class="cs-zone-sub">Strategy + execution mechanic</div><p style="font-size:13px;color:var(--muted);line-height:1.6">What Maverik did differently. The strategy behind the execution. How the creator selection worked, what the content brief looked like, how timing was coordinated. 2–3 bullet points for the key strategic moves, then 1 paragraph on the execution mechanic. Include the TEC Spartans or creator network angle where relevant.</p></div>
+
+    <div class="cs-zone"><div class="cs-zone-num">4</div><h3>Zone 4 — The Numbers</h3><div class="cs-zone-sub">Results · Metrics grid</div><p style="font-size:13px;color:var(--muted);line-height:1.6">4–6 metric tiles in a grid. Primary metric large (views / activations / cities / creators). Secondary: engagement rate, media coverage count, platform breakdown, or conversion metric. All numbers verified before publish — no aspirational figures. [X] placeholders in this document mark unconfirmed figures.</p></div>
+
+    <div class="cs-zone"><div class="cs-zone-num">5</div><h3>Zone 5 — Client Quote</h3><div class="cs-zone-sub">Social proof · Attribution</div><p style="font-size:13px;color:var(--muted);line-height:1.6">Pull quote from client contact (or agency lead if no client quote available). 1–2 sentences. Attribution: Name, Title, Company. Displayed in large italic type with red left border. Requires client approval before publish. Optional: "Client has approved this case study for public display" note in CMS.</p></div>
+
+    <div class="cs-zone"><div class="cs-zone-num">6</div><h3>Zone 6 — What's Next</h3><div class="cs-zone-sub">Cross-sell · Related work</div><p style="font-size:13px;color:var(--muted);line-height:1.6">2 related campaign cards — same client (if multi-campaign) or same vertical. "Start a similar campaign" CTA button. Optional: "Services used" tag list (Influencer Marketing, Campus Activation, etc.) that links to relevant /services sections.</p></div>
+
+    <hr class="divider">
+    <h3 style="margin-bottom:8px">Full Case Study Copy — HP Apple Attack</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:24px">Complete ready-to-publish copy. Fill in [X] values with confirmed metrics before dev puts this live.</p>
+
+    <div class="cs-copy-header">
+      <div class="cs-headline">HP Apple Attack</div>
+      <div class="cs-meta-row">
+        <div class="cs-meta-item"><div class="cs-meta-key">Client</div><div class="cs-meta-val">HP India</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-key">Campaign Type</div><div class="cs-meta-val">Influencer Blitz · 72-Hour Burst</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-key">Year</div><div class="cs-meta-val">2024</div></div>
+        <div class="cs-meta-item"><div class="cs-meta-key">Network</div><div class="cs-meta-val">Maverik × TEC (The Esports Club)</div></div>
+      </div>
+      <div class="cs-hook">"When Apple announced Mac gaming, HP didn't get defensive. They got louder — through 200+ creators who already had the audience's trust."</div>
+    </div>
+
+    <div class="metric-row" style="margin-bottom:16px">
+      <div class="metric-tile"><div class="num">167M+</div><div class="lbl">Total Campaign Views</div></div>
+      <div class="metric-tile"><div class="num">200+</div><div class="lbl">Creators Deployed</div></div>
+      <div class="metric-tile"><div class="num">72 hrs</div><div class="lbl">Burst Window</div></div>
+      <div class="metric-tile"><div class="num">[X]%</div><div class="lbl">Avg. Engagement Rate</div></div>
+      <div class="metric-tile"><div class="num">[X]</div><div class="lbl">Media Mentions</div></div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Brief</div>
+      <div class="cs-body">
+        <p>Apple announced Mac gaming support. The gaming community noticed. For most gaming hardware brands, a competitor announcement like that lands like a warning shot — a reason to go quiet and see what happens. HP India took the opposite call.</p>
+        <p>The brief to Maverik was direct: India's gaming community needs to hear from HP in the next 72 hours. Not a defensive response, not a counter-announcement — but an organic, creator-driven conversation that reaffirms why serious Indian gamers choose HP. The audience couldn't feel like they were being marketed at. It had to feel like their creators, who they already trusted, were just talking about what they use.</p>
+        <p>The constraint that made this hard: HP needed critical mass fast. A slow drip campaign wouldn't register next to Apple's announcement cycle. The only way to dominate the conversation was coordinated volume — enough creators, posting close enough together, that the HP narrative became the dominant gaming discourse for a 72-hour window.</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Approach</div>
+      <div class="cs-body">
+        <p>Maverik activated its full gaming creator network — the same creators who had already built audiences on gaming content, product reviews, and community commentary. The strategy had three moves:</p>
+        <ul class="cs-bullets">
+          <li><strong>Burst-window coordination:</strong> 200+ creators briefed on the same 72-hour content window. Not identical scripts — individual creators with individual voices — but coordinated timing so the aggregate volume created a conversation moment, not isolated posts.</li>
+          <li><strong>Authentic over polished:</strong> The brief to creators was simple: show your HP setup, tell your audience why you use it for serious gaming, and keep it real. No brand-speak, no read-from-the-brief energy. Creators who tried to over-produce were coached back toward natural.</li>
+          <li><strong>Tier architecture:</strong> Tier-1 gaming creators anchored the campaign with long-form YouTube content. Tier-2 and micro-creators amplified on Instagram and Shorts, creating the sense of a community-wide conversation rather than a paid media run.</li>
+        </ul>
+        <p>TEC's (The Esports Club) creator relationships were the operational backbone — these weren't cold-briefed influencers. They were part of a network built over years of gaming community investment, which meant faster execution, higher content quality, and authenticity that paid media can't replicate.</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The Numbers</div>
+      <div class="metric-row">
+        <div class="metric-tile"><div class="num">167M+</div><div class="lbl">Total Views Across All Platforms</div></div>
+        <div class="metric-tile"><div class="num">200+</div><div class="lbl">Creators Active in Burst Window</div></div>
+        <div class="metric-tile"><div class="num">72</div><div class="lbl">Hour Execution Window</div></div>
+        <div class="metric-tile"><div class="num">[X]%</div><div class="lbl">Avg Engagement Rate (confirm with team)</div></div>
+        <div class="metric-tile"><div class="num">[X]</div><div class="lbl">Media Mentions / Press Coverage</div></div>
+        <div class="metric-tile"><div class="num">Pan-India</div><div class="lbl">Geographic Coverage</div></div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Client Quote</div>
+      <div class="cs-body">
+        <p style="font-size:16px;font-style:italic;border-left:3px solid var(--red);padding-left:16px;color:var(--text)">[Client quote to be inserted here — requires approval from HP India contact before publish]</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px">— [Name], [Title], HP India</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO -->
+<section id="seo">
+  <div class="wrap">
+    <div class="sec-label">Section 10 — SEO Metadata</div>
+    <h2>Title Tags, Meta Descriptions & URL Structure</h2>
+    <p class="sec-intro">Ready to paste into the CMS. All pages. Character counts verified. Target keywords are youth marketing and esports-adjacent terms with lower competition than "gaming marketing agency."</p>
+
+    <div style="overflow-x:auto">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Title Tag (55–60 chars)</th>
+            <th>Meta Description (150–160 chars)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-url">/</td>
+            <td>Maverik | Youth Marketing Agency India</td>
+            <td>India's leading youth marketing agency. 200+ creators, 17 cities, 9 enterprise campaigns. Influencer, esports, and campus activation for brands targeting Gen Z.</td>
+          </tr>
+          <tr>
+            <td class="td-url">/work</td>
+            <td>Our Work | Maverik Campaigns</td>
+            <td>9 campaigns. 167M+ views. HP, Amazon, Dell, Intel, Acer, Lenovo, Garena, Riot Games. See how Maverik activates India's youth audience at scale.</td>
+          </tr>
+          <tr>
+            <td class="td-url">/work/hp-apple-attack</td>
+            <td>HP Apple Attack — 167M+ Views | Maverik</td>
+            <td>How Maverik activated 200+ gaming creators in 72 hours to own the conversation when Apple entered gaming. India's largest coordinated creator campaign.</td>
+          </tr>
+          <tr>
+            <td class="td-url">/services</td>
+            <td>Services | Influencer, Esports & Campus</td>
+            <td>Influencer and creator marketing, esports and gaming campaigns, and campus activations across 17 Indian cities. Full-stack youth marketing execution.</td>
+          </tr>
+          <tr>
+            <td class="td-url">/about</td>
+            <td>About Maverik | Youth Marketing India</td>
+            <td>Maverik is the influencer and activation arm of Basik Marketing Private Limited. Built on TEC (The Esports Club) infrastructure. 200+ creators. 17 cities.</td>
+          </tr>
+          <tr>
+            <td class="td-url">/contact</td>
+            <td>Start a Brief | Maverik</td>
+            <td>Tell us about your campaign. We work with brands in tech, gaming, lifestyle, and commerce targeting India's youth. Response within 1 business day.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT NEEDS -->
+<section id="content">
+  <div class="wrap">
+    <div class="sec-label">Section 11 — Content Needs from Gopal</div>
+    <h2>What the Dev Team Needs Before Building</h2>
+    <p class="sec-intro">The dev team is blocked on specific items. This is the master list of what Gopal needs to supply. Priority order.</p>
+
+    <div class="card-grid col2">
+      <div class="card">
+        <h4 style="color:var(--red);margin-bottom:10px">High Priority — Blocks Dev</h4>
+        <p style="font-size:13px;color:var(--muted);line-height:1.8">① Hero headline decision (use Section 03 selector)<br>② Campaign hero images for all 9 cases (min 1440×600px)<br>③ HP Apple Attack metrics: exact engagement rate % and media mention count<br>④ Client quote from HP India contact for HP Apple Attack case study<br>⑤ Confirmation on which 4 campaigns to feature on homepage grid</p>
+      </div>
+      <div class="card">
+        <h4 style="color:var(--amber);margin-bottom:10px">Medium Priority — Needed for Launch</h4>
+        <p style="font-size:13px;color:var(--muted);line-height:1.8">⑥ Brief intake form field list — confirm the 6–8 fields we want (budget range options, etc.)<br>⑦ Contact form backend endpoint or CRM to connect it to<br>⑧ Team page — confirm if including, and who appears with what title<br>⑨ Campaign metrics for remaining 8 case studies (verify all [X] placeholders)<br>⑩ Founder note for About section (2–3 sentences max)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEV CHECKLIST — INTERACTIVE -->
+<section id="checklist">
+  <div class="wrap">
+    <div class="sec-label">Section 12 — Dev Checklist</div>
+    <h2>23-Item Implementation Checklist</h2>
+    <p class="sec-intro">Check items off as the team completes them. Progress is saved in your browser. Assign items to the right owner before the dev sprint starts.</p>
+
+    <div class="check-progress"><div class="check-progress-bar" id="progress-bar" style="width:0%"></div></div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:24px" id="progress-label">0 of 23 tasks complete</p>
+
+    <div id="checklist-items">
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="0" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Remove all Gossip.GG references from the site</div>
+          <div class="check-detail">Search codebase and CMS for "Gossip.GG" — remove from footer, case studies, any embedded links. Replace with "featured in tech media" where needed.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="1" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Fix footer entity: "Basik Marketing Private Limited | Confidential"</div>
+          <div class="check-detail">This must appear exactly as written on every page of the site. Update the global footer component in the CMS.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="2" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Replace "TEC Arena" with "TEC (The Esports Club)" sitewide</div>
+          <div class="check-detail">Find-and-replace in CMS. Check all pages, meta content, image alt text, and schema markup.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="3" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Remove "1,300 lifestyle creators" claim</div>
+          <div class="check-detail">This figure represents agency-side connects, not Maverik's own network. Replace with "200+ creators" wherever it appears.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="4" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Hero headline — implement selected option from Section 03</div>
+          <div class="check-detail">Blocked until Gopal selects headline (see Section 03 above). Once selected, implement with subheadline: "200+ creators. 17 cities. 9 campaigns that proved it."</div>
+          <span class="check-owner owner-gopal">Gopal Decision</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="5" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Build client logo bar with all 8 approved logos</div>
+          <div class="check-detail">HP · Amazon · Dell · Intel · Acer · Lenovo · Garena · Riot Games. Use official brand logo files. Place in hero section and below About section. All 8 confirmed approved.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="6" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Update brand colors to correct Maverik palette</div>
+          <div class="check-detail">Replace all dark navy values (#0D0F1A, #FF2D20) with correct tokens from Section 04: --bg: #1d1d1d · --red: #fd2521 · --coral: #fb696a · --deep: #593132</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="7" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Rewrite About section copy</div>
+          <div class="check-detail">Use the About copy from Section 08 (Zone 5). Include Basik ecosystem context. Remove all generic agency language. Gopal to review and approve before publish.</div>
+          <span class="check-owner owner-team">Team</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="8" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Build /work page with all 9 campaign cards</div>
+          <div class="check-detail">Use campaign specs from Section 07. Campaign hero images needed from Gopal. Filter by vertical (Influencer / Gaming / Experiential / Commerce / Lifestyle). Each card links to full case study page.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="9" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Build HP Apple Attack full case study page</div>
+          <div class="check-detail">Use the 6-zone template + full copy from Section 09. Fill [X] placeholders before publish. Requires client quote from HP India and final metric confirmation.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="10" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Collect campaign hero images from Gopal — all 9</div>
+          <div class="check-detail">Min resolution: 1440×600px. Accepted formats: JPG/PNG/WebP. Needed for /work cards and individual case study hero sections.</div>
+          <span class="check-owner owner-gopal">Gopal to Supply</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="11" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Build /services page with 3 service pillars</div>
+          <div class="check-detail">Three pillars from Section 02. Each pillar: headline, description, proof stat, relevant case study links, "Start a Brief" CTA. Use service specs from Section 08.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="12" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Upgrade contact form — add brief intake fields</div>
+          <div class="check-detail">Add to existing contact form: Brand/Campaign type (dropdown) · Budget range (optional dropdown) · Target audience (text) · Campaign timeline · Key KPIs. Confirm field list and CRM endpoint with Gopal before build.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="13" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Implement SEO metadata — all 6 pages</div>
+          <div class="check-detail">Title tags, meta descriptions, and OG tags from Section 10. Add schema markup: Organization + BreadcrumbList + Article (for case studies). Verify character counts in CMS preview before publish.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="14" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Fonts: Barlow Condensed + DM Sans via Google Fonts</div>
+          <div class="check-detail">Preload both fonts in &lt;head&gt;. Weights: Barlow Condensed 400/600/700/800 · DM Sans 400/500/600. Add font-display: swap to prevent FOIT. Test across Chrome, Safari, Firefox.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="15" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Mobile responsiveness audit — all pages</div>
+          <div class="check-detail">Test at 375px (iPhone SE), 390px (iPhone 14), 768px (iPad). Specifically check: hero text size, logo bar wrapping, campaign card grid, case study metric tiles, nav behavior.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="16" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Google Analytics 4 — implement events</div>
+          <div class="check-detail">Track: Page views · CTA button clicks (Start a Brief, See Our Work) · Contact form submissions · Case study page visits · Scroll depth on /work. Set up conversion event for form submit.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="17" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Core Web Vitals pass — LCP, CLS, FID</div>
+          <div class="check-detail">Run PageSpeed Insights before launch. Target LCP under 2.5s, CLS under 0.1. Main risk areas: hero image loading, font rendering, logo bar images. Implement lazy loading on campaign card images below the fold.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="18" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">XML sitemap and robots.txt</div>
+          <div class="check-detail">Generate XML sitemap including all 6 main pages + 9 case study pages. robots.txt: allow all main pages, disallow staging/admin. Submit sitemap to Google Search Console after launch.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="19" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Remove Monster Energy from any Maverik-attributed content</div>
+          <div class="check-detail">Monster Energy is Basik Marketing / TEC Spartans work, not Maverik. Do not display it on maverik.gg anywhere. If it appears in case studies or client logos on the site, remove it.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="20" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Cross-browser QA — Chrome, Safari, Firefox, Edge</div>
+          <div class="check-detail">Test key interactions: hero CTA, logo bar, case study grid, filter system on /work, contact form. Minimum: latest versions of Chrome (desktop + mobile), Safari (iOS), Firefox.</div>
+          <span class="check-owner owner-dev">Dev</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="21" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Confirm [X] placeholders in HP Apple Attack before publish</div>
+          <div class="check-detail">Two figures need team confirmation: exact engagement rate % and media mention count. These are in the case study Metric Zone (Section 09). Do not publish the case study page until these are filled in.</div>
+          <span class="check-owner owner-gopal">Gopal to Confirm</span>
+        </div>
+      </div>
+
+      <div class="check-item">
+        <input type="checkbox" class="check-box-input" data-task="22" onchange="updateChecklist()">
+        <div class="check-info">
+          <div class="check-title">Pre-launch review by Director / CEO / Founder</div>
+          <div class="check-detail">Share staging link with leadership team minimum 48 hours before go-live. Specifically: hero headline confirmation, About section copy approval, case study quote sign-off, and client logo bar visual check.</div>
+          <span class="check-owner owner-team">Leadership</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Basik Marketing Private Limited | Confidential</strong><br>
+  This document is for internal team review only. Not for distribution outside Basik Marketing. All campaign metrics are verified to the best of the team's knowledge at time of writing. [X] markers indicate figures pending final confirmation.
+  </p>
+</footer>
+
+<div id="toast">Copied to clipboard ✓</div>
+
+<script>
+// ——— HEADLINE SELECTOR ———
+const HL_KEY = 'maverik_hl_choice';
+const TASK_KEY = 'maverik_tasks';
+const HL_LABELS = {
+  1: 'Option 01 — "Where Brands Meet India\'s Most Influential Generation"',
+  2: 'Option 02 — "India\'s Youth Has Moved On. Have You?"',
+  3: 'Option 03 — "You Don\'t Reach Gen Z. You Earn Them."'
+};
+
+function selectHeadline(n) {
+  try { localStorage.setItem(HL_KEY, n); } catch(e) {}
+  applyHeadlineState(n);
+}
+
+function applyHeadlineState(n) {
+  document.querySelectorAll('.hl-card').forEach(c => c.classList.remove('selected'));
+  if (n) {
+    const card = document.querySelector('.hl-card[data-hl="' + n + '"]');
+    if (card) card.classList.add('selected');
+    document.getElementById('hl-selected-box').style.display = 'block';
+    document.getElementById('hl-pending-box').style.display = 'none';
+    updateDashHeadline(n);
+  } else {
+    document.getElementById('hl-selected-box').style.display = 'none';
+    document.getElementById('hl-pending-box').style.display = 'block';
+    updateDashHeadline(null);
+  }
+}
+
+function updateDashHeadline(n) {
+  const chip = document.querySelector('.dash-chip[data-key="headline"]');
+  const txt = document.getElementById('dash-headline-text');
+  if (n) {
+    chip.classList.remove('pending');
+    chip.classList.add('decided');
+    chip.querySelector('.dash-dot').classList.replace('dot-pending', 'dot-decided');
+    txt.textContent = 'Headline: Option 0' + n + ' Selected';
+  } else {
+    chip.classList.remove('decided');
+    chip.classList.add('pending');
+    chip.querySelector('.dash-dot').classList.replace('dot-decided', 'dot-pending');
+    txt.textContent = 'Hero Headline: Pending';
+  }
+}
+
+function clearHeadline(e) {
+  e.preventDefault();
+  try { localStorage.removeItem(HL_KEY); } catch(e2) {}
+  applyHeadlineState(null);
+}
+
+// ——— CHECKLIST ———
+function updateChecklist() {
+  const boxes = document.querySelectorAll('.check-box-input');
+  const state = {};
+  let done = 0;
+  boxes.forEach(b => {
+    state[b.dataset.task] = b.checked;
+    if (b.checked) done++;
+  });
+  try { localStorage.setItem(TASK_KEY, JSON.stringify(state)); } catch(e) {}
+  const pct = Math.round((done / boxes.length) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = done + ' of ' + boxes.length + ' tasks complete';
+  updateDashChecklist(done, boxes.length);
+}
+
+function updateDashChecklist(done, total) {
+  const chip = document.querySelector('.dash-chip[data-key="checklist"]');
+  const txt = document.getElementById('dash-checklist-text');
+  txt.textContent = 'Dev Tasks: ' + done + ' / ' + total;
+  if (done === total) {
+    chip.classList.remove('pending');
+    chip.classList.add('decided');
+    chip.querySelector('.dash-dot').classList.replace('dot-pending', 'dot-decided');
+  } else {
+    chip.classList.remove('decided');
+    chip.classList.add('pending');
+    chip.querySelector('.dash-dot').classList.replace('dot-decided', 'dot-pending');
+  }
+}
+
+// ——— EXPORT DECISIONS ———
+function exportDecisions() {
+  const hlChoice = getHL();
+  const boxes = document.querySelectorAll('.check-box-input');
+  let doneTasks = [], pendingTasks = [];
+  boxes.forEach((b, i) => {
+    const title = b.nextElementSibling.querySelector('.check-title').textContent;
+    if (b.checked) doneTasks.push('✓ ' + title);
+    else pendingTasks.push('○ ' + title);
+  });
+  let out = 'MAVERIK.GG TEAM DECISIONS — ' + new Date().toDateString() + '\n';
+  out += '================================================\n\n';
+  out += '1. HERO HEADLINE\n';
+  out += hlChoice ? '   SELECTED: ' + HL_LABELS[hlChoice] + '\n' : '   STATUS: Pending — not yet selected\n';
+  out += '\n2. DEV CHECKLIST (' + doneTasks.length + '/' + (doneTasks.length + pendingTasks.length) + ' complete)\n';
+  if (doneTasks.length) out += '\n   Completed:\n   ' + doneTasks.join('\n   ') + '\n';
+  if (pendingTasks.length) out += '\n   Remaining:\n   ' + pendingTasks.join('\n   ') + '\n';
+  out += '\n================================================\n';
+  out += 'Exported from Maverik Website Review Doc | Basik Marketing Private Limited | Confidential\n';
+  try {
+    navigator.clipboard.writeText(out).then(() => showToast('Decisions copied to clipboard ✓'));
+  } catch(e) {
+    const ta = document.createElement('textarea');
+    ta.value = out;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Decisions copied to clipboard ✓');
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function getHL() {
+  try { return localStorage.getItem(HL_KEY); } catch(e) { return null; }
+}
+
+// ——— INIT ———
+(function init() {
+  // Restore headline
+  const savedHL = getHL();
+  applyHeadlineState(savedHL ? parseInt(savedHL) : null);
+
+  // Restore tasks
+  let state = {};
+  try { const s = localStorage.getItem(TASK_KEY); if (s) state = JSON.parse(s); } catch(e) {}
+  const boxes = document.querySelectorAll('.check-box-input');
+  let done = 0;
+  boxes.forEach(b => {
+    if (state[b.dataset.task]) { b.checked = true; done++; }
+  });
+  const pct = boxes.length ? Math.round((done / boxes.length) * 100) : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = done + ' of ' + boxes.length + ' tasks complete';
+  updateDashChecklist(done, boxes.length);
+})();
+</script>
+</body>
+</html>
+
+</body></html>
